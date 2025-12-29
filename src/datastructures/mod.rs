@@ -1,4 +1,5 @@
 pub mod linked_list; // makes the file linked_list visible from this folder
+pub mod notes;
 
 pub use linked_list::{
     LinkedList,
