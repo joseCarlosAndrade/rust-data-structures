@@ -38,7 +38,10 @@ impl LinkedList {
     }
 
     pub fn print(&mut self) {
+        println!("=== begin list ===");
         if self.count == 0 {
+            println!("=== end list ===");
+
             return
         }
 
@@ -54,6 +57,7 @@ impl LinkedList {
             current = current.unwrap().next.as_mut();
         }
 
+        println!("=== end list ===");
     }
 
     pub fn push(&mut self, value : i32) -> bool {
@@ -151,6 +155,12 @@ impl LinkedList {
         // traverses the list and then pops it
         if self.count <= 0 {
             return None;
+        }
+
+        if self.count == 1 {
+            self.count -= 1;
+
+            return self.head.take().map(|node| return node.value); // edge case: pops head
         }
 
         let mut current = self.head.as_mut();
