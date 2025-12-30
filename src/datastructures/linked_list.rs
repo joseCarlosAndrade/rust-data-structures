@@ -71,6 +71,7 @@ impl LinkedList {
         true
     }
 
+    
     pub fn push_back(&mut self, value : i32) -> bool {
         if self.count >= MAX_ELEMENTS {return false}
 
@@ -126,4 +127,51 @@ impl LinkedList {
     } 
 
 
+    pub fn insert(&mut self, value: i32, pos : usize) -> bool {
+        // inserts value at pos index
+        true
+    }
+
+    pub fn pop(&mut self) -> Option<i32> {
+        // pops the head
+        if self.count <= 0 {
+            return None;
+        }
+
+        let old_head = self.head.take().unwrap(); // self.head-> is now None
+        self.head = old_head.next;
+
+        self.count -= 1;
+
+        // self.head.as_ref().unwrap().value
+        Some(old_head.value) // theres another way of doing it like the function below
+    }
+
+    pub fn pop_back(&mut self) -> Option<i32> {
+        // traverses the list and then pops it
+        if self.count <= 0 {
+            return None;
+        }
+
+        let mut current = self.head.as_mut();
+
+        while current.as_ref().unwrap().next.is_some() && 
+                current.as_ref().unwrap().next.as_ref().unwrap().next.is_some() {
+
+            current = current.unwrap().next.as_mut();
+
+        }
+
+        // this
+        // let old_last = current.unwrap().next.take();
+        // old_last.unwrap().value
+
+        // or this
+        return current.unwrap().next.take().map(|node| return node.value);
+    }
+
+    pub fn peek(&self) -> i32 {
+        // peeks at the head but doesnt remove it
+        self.head.as_ref().unwrap().value
+    }
 }
