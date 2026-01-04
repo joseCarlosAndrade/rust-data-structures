@@ -21,15 +21,15 @@ let current : Option<&mut Box<Node>> = head.as_mut();
 
 */
 
-struct Node {
+struct _Node {
     value : i32,
-    next: Option<Box<Node>>
+    next: Option<Box<_Node>>
 }
 
 fn _a() {
-    let mut head = Some(Box::new(Node{ value : 10, next: None}));
+    let mut head = Some(Box::new(_Node{ value : 10, next: None}));
 
-    let current : Option<&mut Box<Node>> = head.as_mut(); // borrowing as mutable
+    let current : Option<&mut Box<_Node>> = head.as_mut(); // borrowing as mutable
     // but!!!! instead of &mut Option<Box<Node>> we have Option<&mut Box<Node>>
     // its like creating another Option that has a mutable reference to whats inside the original box
 
@@ -51,12 +51,12 @@ fn _using_take() {
     // memory is allowed)
 
     // ex :  head(1, next(2, None))
-    let mut head = Node 
+    let mut head = _Node 
         { 
             value : 1, 
             next : Some(
                 Box::new(
-                    Node
+                    _Node
                     {
                         value : 2, 
                         next : None

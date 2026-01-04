@@ -28,6 +28,12 @@ impl Node {
     }
 }
 
+impl Default for LinkedList {
+    fn default() -> Self {
+        LinkedList::new()
+    }
+}
+
 
 impl LinkedList {
     pub fn new() -> Self {
@@ -131,9 +137,31 @@ impl LinkedList {
     } 
 
 
-    pub fn insert(&mut self, value: i32, pos : usize) -> bool {
+    pub fn _insert_at(&mut self, value: i32, pos : usize) -> Result<(), String> {
         // inserts value at pos index
-        true
+        if pos > self.count {
+            return Err("index out of bounds".to_string());
+        }
+
+        if self.count >= MAX_ELEMENTS {
+            return Err("list is at full capacity".to_string());
+        }
+
+        // check for empty list
+        
+        // insert at 0
+        if pos == 0 {
+
+        }
+
+        // insert at the last postition
+        if pos == self.count {
+
+        }
+
+        self.count += 1;
+
+        Ok(())
     }
 
     pub fn pop(&mut self) -> Option<i32> {
